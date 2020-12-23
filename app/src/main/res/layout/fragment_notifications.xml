@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
+    android:orientation="vertical"
+    tools:context=".ui.notifications.NotificationsFragment">
+
+    <TextView
+        android:id="@+id/q1t"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="어디에 온 안전 안내문자를 보시겠어요?"
+        android:textSize="20dp"
+        app:layout_constraintHorizontal_bias="0"
+        android:layout_marginLeft="30dp"
+        android:textColor="#000000"
+        app:layout_constraintBottom_toTopOf="@id/ll1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0"/>
+
+    <LinearLayout
+        android:id="@+id/ll1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@id/lll"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/q1t"
+        app:layout_constraintVertical_bias="0">
+
+        <Spinner
+            android:id="@+id/spinner1"
+            android:layout_width="135dp"
+            android:layout_marginRight="10dp"
+            android:layout_height="wrap_content"
+            android:entries="@array/large_scale"
+            android:background="@drawable/gradient_spinner"/>
+
+        <Spinner
+            android:id="@+id/spinner2"
+            android:layout_width="135dp"
+            android:layout_marginLeft="10dp"
+            android:layout_height="wrap_content"
+            android:entries="@array/small_scale"
+            android:background="@drawable/gradient_spinner"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/ll1"
+        app:layout_constraintBottom_toTopOf="@+id/buttonBox"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        android:orientation="vertical">
+            <TextView
+            android:id="@+id/q2t"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintHorizontal_bias="0"
+            android:text="언제 온 안전 안내문자를 보시겠어요?"
+            android:textSize="20dp"
+            android:layout_marginLeft="30dp"
+            android:textColor="#000000"
+            app:layout_constraintBottom_toTopOf="@+id/noti"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+            <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/noti"
+            android:text=""
+            android:textColor="#FF0000"
+            android:textSize="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/q2t"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            android:layout_marginLeft="30dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/buttonBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lll">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <Button
+                android:layout_margin="3dp"
+                android:background="@drawable/button_button01"
+                android:textColor="#FFFFFF"
+                android:id="@+id/oneday"
+                android:text="최근 1일"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:textSize="20sp"/>
+            <Button
+                android:layout_margin="3dp"
+                android:background="@drawable/button_button01"
+                android:textColor="#FFFFFF"
+                android:id="@+id/sevenday"
+                android:text="최근 1주"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:textSize="20sp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <Button
+                android:layout_margin="3dp"
+                android:background="@drawable/button_button01"
+                android:textColor="#FFFFFF"
+                android:id="@+id/threeday"
+                android:text="최근 3일"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:textSize="20sp"/>
+            <Button
+                android:layout_margin="3dp"
+                android:background="@drawable/button_button01"
+                android:textColor="#FFFFFF"
+                android:id="@+id/onefourday"
+                android:text="최근 2주"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:textSize="20sp"/>
+
+        </LinearLayout>
+        <Button
+            android:id="@+id/setOk"
+            android:background="@drawable/button_button01"
+            android:textColor="#FFFFFF"
+            android:textSize="30sp"
+            android:text="확인\n하기"
+            android:layout_marginLeft="40dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

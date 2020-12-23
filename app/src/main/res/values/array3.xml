@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="recent_time">
+        <item>최근 1일</item>
+        <item>최근 3일</item>
+        <item>최근 1주</item>
+        <item>최근 2주</item>
+    </string-array>
+</resources>

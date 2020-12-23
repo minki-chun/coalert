@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "325710011926",
+    "firebase_url": "https://coalert-d7822.firebaseio.com",
+    "project_id": "coalert-d7822",
+    "storage_bucket": "coalert-d7822.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:325710011926:android:f35aa6936db27a67d19f37",
+        "android_client_info": {
+          "package_name": "com.example.coalert"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "325710011926-vul2f316mdclqlig8cbpicdcfbjart9c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.coalert",
+            "certificate_hash": "842b658107a1ee7ff3fde252f100a31b825e1586"
+          }
+        },
+        {
+          "client_id": "325710011926-5gqop89bk1scc2tq27o7ackccesflcjl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-SxIGHoUH9i7PbVKwOHX02n4-GPu45Ag"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "325710011926-5gqop89bk1scc2tq27o7ackccesflcjl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
