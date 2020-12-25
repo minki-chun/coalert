@@ -1,6 +1,7 @@
 package com.example.coalert.ui.home;
 
 import android.os.Bundle;
+import android.os.PatternMatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,6 +36,7 @@ import java.util.Date;
 
 import java.util.ArrayList;
 import java.util.Locale;
+import java.util.regex.Pattern;
 
 public class HomeFragment extends Fragment {
 
@@ -112,7 +114,8 @@ public class HomeFragment extends Fragment {
                     arrayList.clear();
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()){
                         messageList messageList = snapshot.getValue(com.example.coalert.messageList.class);
-                        if(messageList.getMessage().contains(sharedViewModel.getSmallloc())&&today(messageList.getDate().split(" ")[0])<=(long)sharedViewModel.getTime()) {
+                        //if(messageList.getMessage().contains(sharedViewModel.getSmallloc())&&today(messageList.getDate().split(" ")[0])<=(long)sharedViewModel.getTime()) {
+                        if(messageList.getMessage().startsWith("["+sharedViewModel.getSmallloc())&&today(messageList.getDate().split(" ")[0])<=(long)sharedViewModel.getTime()) {
                             messageList.setMessage(messageList.getMessage().split("-송출지역")[0]);
                             arrayList.add(messageList);
                         }
@@ -128,6 +131,8 @@ public class HomeFragment extends Fragment {
             });
         }
     }
+
+
 
     @Nullable
     @Override
