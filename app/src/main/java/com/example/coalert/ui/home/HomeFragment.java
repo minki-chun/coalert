@@ -52,7 +52,7 @@ public class HomeFragment extends Fragment {
     Switch sw;
     public SharedViewModel sharedViewModel;
 
-    class nSL implements CompoundButton.OnCheckedChangeListener{
+    class nSL implements CompoundButton.OnCheckedChangeListener{ //현재지역 스위치 눌렀을 때
         @Override
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
             if(isChecked){
@@ -141,7 +141,7 @@ public class HomeFragment extends Fragment {
         homeViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         final TextView prev = (TextView) root.findViewById(R.id.hometextView);
-        sw = (Switch) root.findViewById(R.id.switch1);
+        sw = root.findViewById(R.id.switch1);
         recyclerView = (RecyclerView) root.findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getContext());

@@ -16,28 +16,23 @@
         android:text="현재지역만 보기 "
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/mapviewframe"
+        app:layout_constraintBottom_toTopOf="@+id/mapview"
         app:layout_constraintStart_toStartOf="parent"
         android:textSize="20dp"
         android:textColor="#FFFFFF" />
 
-    <FrameLayout
-        android:id="@+id/mapviewframe"
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/mapview"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_width="match_parent"
         android:layout_height="390dp"
+        android:name="com.google.android.gms.maps.MapFragment"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/switch2"
-        app:layout_constraintBottom_toTopOf="@id/maptextView">
-        <ImageView
-            android:id="@+id/mapview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/te155"
-            android:adjustViewBounds="true"/>
-    </FrameLayout>
+        app:layout_constraintBottom_toTopOf="@id/maptextView"/>
+
     <TextView
         android:id="@+id/maptextView"
         android:layout_width="match_parent"
@@ -53,7 +48,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mapviewframe" />
+        app:layout_constraintTop_toBottomOf="@+id/mapview" />
 
 
 

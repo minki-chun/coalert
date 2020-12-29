@@ -11,6 +11,29 @@ public class SharedViewModel extends ViewModel {
     private boolean here = false;
     private boolean settin = false;
     private boolean first = true;
+    private double latitude = 37.56000;
+    private double longitude = 126.97000;
+    private float zoomLevel = 15;
+
+    public void setLatitude(double latitude){
+        this.latitude = latitude;
+    }
+    public double getLatitude(){
+        return latitude;
+    }
+    public void setLongitude(double longitude){
+        this.longitude = longitude;
+    }
+    public double getLongitude(){
+        return longitude;
+    }
+    public void setZoomLevel(float zoomLevel){
+        this.zoomLevel = zoomLevel;
+    }
+    public float getZoomLevel(){
+        return zoomLevel;
+    }
+
 
     public boolean getFirst() {
         return first;
