@@ -1,7 +1,10 @@
 package com.example.coalert.ui.notifications;
 
 import android.app.Activity;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +30,10 @@ import com.example.coalert.ui.home.HomeFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationMenu;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
+
 public class NotificationsFragment extends Fragment {
 
     private SharedViewModel sharedViewModel;
@@ -45,6 +52,7 @@ public class NotificationsFragment extends Fragment {
     FragmentTransaction transaction;
     Fragment newFragment;
     TextView notiTe;
+    Geocoder geocoder;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              final ViewGroup container, Bundle savedInstanceState) {
@@ -125,44 +133,60 @@ public class NotificationsFragment extends Fragment {
         setOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                List<Address> list = null;
+                geocoder = new Geocoder(getContext(), Locale.getDefault());
+                try{
+                    list = geocoder.getFromLocationName(lar + " " + sma, 1);
+                }
+                catch (IOException e){
+                    Log.e("e","error");
+                }
 
-                if(oneDay.isSelected()){
+                if(oneDay.isSelected()&&list!=null){
                     if((lar != "")&&(sma != "")){
                         sharedViewModel.setTime(1);
                         sharedViewModel.setLargeloc(lar);
                         sharedViewModel.setSmallloc(sma);
                         sharedViewModel.setSettin(true);
                         sharedViewModel.setHere(false);
+                        sharedViewModel.setLatitude(list.get(0).getLatitude());
+                        sharedViewModel.setLongitude(list.get(0).getLongitude());
                         transaction.commit();
                     }
                 }
-                else if(threeDay.isSelected()){
+                else if(threeDay.isSelected()&&list!=null){
                     if((lar != "")&&(sma != "")){
                         sharedViewModel.setTime(3);
                         sharedViewModel.setLargeloc(lar);
                         sharedViewModel.setSmallloc(sma);
                         sharedViewModel.setSettin(true);
                         sharedViewModel.setHere(false);
+                        sharedViewModel.setLatitude(list.get(0).getLatitude());
+                        sharedViewModel.setLongitude(list.get(0).getLongitude());
                         transaction.commit();
                     }
                 }
-                else if(sevenDay.isSelected()){
+                else if(sevenDay.isSelected()&&list!=null){
                     if((lar != "")&&(sma != "")){
                         sharedViewModel.setTime(7);
                         sharedViewModel.setLargeloc(lar);
                         sharedViewModel.setSmallloc(sma);
                         sharedViewModel.setSettin(true);
                         sharedViewModel.setHere(false);
+                        sharedViewModel.setLatitude(list.get(0).getLatitude());
+                        sharedViewModel.setLongitude(list.get(0).getLongitude());
                         transaction.commit();
                     }
                 }
-                else if(oneFourDay.isSelected()){
+                else if(oneFourDay.isSelected()&&list!=null){
                     if((lar != "")&&(sma != "")){
                         sharedViewModel.setTime(14);
                         sharedViewModel.setLargeloc(lar);
                         sharedViewModel.setSmallloc(sma);
                         sharedViewModel.setSettin(true);
                         sharedViewModel.setHere(false);
+                        sharedViewModel.setLatitude(list.get(0).getLatitude());
+                        sharedViewModel.setLongitude(list.get(0).getLongitude());
                         transaction.commit();
                     }
                 }

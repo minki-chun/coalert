@@ -1,5 +1,12 @@
 package com.example.coalert.ui.home;
 
+import android.Manifest;
+import android.content.Context;
+import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.PatternMatcher;
 import android.util.Log;
@@ -9,9 +16,11 @@ import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.location.Geocoder;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -28,6 +37,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -35,11 +46,14 @@ import java.util.Calendar;
 import java.util.Date;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.regex.Pattern;
 
 public class HomeFragment extends Fragment {
 
+    Geocoder geocoder;
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private ArrayList<messageList> arrayList;
@@ -51,19 +65,53 @@ public class HomeFragment extends Fragment {
     private int current_status;
     Switch sw;
     public SharedViewModel sharedViewModel;
+    LocationManager manager;
+
+    LocationListener gpsListener = new LocationListener() {
+        @Override
+        public void onLocationChanged(@NonNull Location location) {
+            Double latitude = location.getLatitude();
+            Double longitude = location.getLongitude();
+            reverseGeoCoding(latitude, longitude);
+        }
+    };
+
+    //역지오코딩
+    public void reverseGeoCoding(double latitude, double longitude){
+        List<Address> list = null;
+        geocoder = new Geocoder(getContext(), Locale.getDefault());
+        try {
+            list = geocoder.getFromLocation(latitude, longitude, 1);
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.e("e", "geo-coding failed");
+        } catch (IllegalArgumentException illegalArgumentException) {
+            Log.e("e", "geo-coding failed");
+        }
+        if (list != null) {
+            String cut[] = list.get(0).toString().split(" ");
+            sharedViewModel.setGeoLargeloc(cut[1]);
+            sharedViewModel.setGeoSmallloc(cut[2]);
+            sharedViewModel.setAllAdress(cut[1]+ " " + cut[2]+ " " + cut[3]+ " " + cut[4].split("\"")[0]);
+            // cut[0] : Address[addressLines=[0:"대한민국
+            // cut[1] : 서울특별시  cut[2] : 송파구  cut[3] : 오금동
+            // cut[4] : cut[4] : 41-26"],feature=41-26,admin=null ~~~~
+        }
+    }
 
     class nSL implements CompoundButton.OnCheckedChangeListener{ //현재지역 스위치 눌렀을 때
         @Override
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
             if(isChecked){
                 sharedViewModel.setHere(true);
+                //startLocationService();
                 databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         arrayList.clear();
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()){
                             messageList messageList = snapshot.getValue(com.example.coalert.messageList.class);
-                            if(messageList.getMessage().contains("동대문구")) {
+                            if(messageList.getMessage().startsWith("["+sharedViewModel.getGeoSmallloc())) {
                                 messageList.setMessage(messageList.getMessage().split("-송출지역")[0]);
                                 arrayList.add(messageList);
                             }
@@ -104,10 +152,9 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
         if(sharedViewModel.getHere()){sw.setChecked(true);}
         else {sw.setChecked(false);}
-        if(sharedViewModel.getSettin()){
+        if(sharedViewModel.getSettin()&&!sharedViewModel.getHere()){
             databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -131,14 +178,45 @@ public class HomeFragment extends Fragment {
             });
         }
     }
+    /*
+    private void startLocationService() {
+        manager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+        long minTime = 3000;
+        float minDistance = 0;
+        try {
+            int chk1 = ContextCompat.checkSelfPermission(Objects.requireNonNull(getContext()), Manifest.permission.ACCESS_FINE_LOCATION);
+            int chk2 = ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION);
 
-
+            Location location = null;
+            if (chk1 == PackageManager.PERMISSION_GRANTED && chk2 == PackageManager.PERMISSION_GRANTED) {
+                if(manager.isProviderEnabled(LocationManager.GPS_PROVIDER)){
+                    location = manager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                    if (location != null) {
+                        double latitude = location.getLatitude();
+                        double longitude = location.getLongitude();
+                        reverseGeoCoding(latitude, longitude);
+                    }
+                    manager.requestLocationUpdates(LocationManager.GPS_PROVIDER, minTime, minDistance, gpsListener);
+                }
+                else if(manager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+                    location = manager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+                    if (location != null) {
+                        double latitude = location.getLatitude();
+                        double longitude = location.getLongitude();
+                        reverseGeoCoding(latitude, longitude);
+                    }
+                    manager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, minTime, minDistance, gpsListener);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }*/
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         final TextView prev = (TextView) root.findViewById(R.id.hometextView);
         sw = root.findViewById(R.id.switch1);
@@ -152,6 +230,8 @@ public class HomeFragment extends Fragment {
         databaseReference = database.getReference("");
         sw.setOnCheckedChangeListener(new nSL());
 
+        sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
+        //startLocationService();
 
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
