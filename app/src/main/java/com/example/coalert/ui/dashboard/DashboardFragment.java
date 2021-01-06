@@ -193,7 +193,7 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
         LatLng curPoint = new LatLng(latitude, longitude);
 
         //디폴트 위치, Seoul
-        String markerTitle = "내위치";
+        String markerTitle = "You are here!";
         String markerSnippet = sharedViewModel.getAllAdress()+"";
 
         if (currentMarker != null) currentMarker.remove();

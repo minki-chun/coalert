@@ -247,7 +247,7 @@ public class HomeFragment extends Fragment {
                 }
                 adapter.notifyDataSetChanged();
                 recyclerView.scrollToPosition(adapter.getItemCount()-1);
-                prev.setText(sample_prev + "  (더보기..)");
+                prev.setText(sample_prev + "  (see more..)");
             }
 
             @Override
@@ -275,7 +275,7 @@ public class HomeFragment extends Fragment {
                             }
                             adapter.notifyDataSetChanged();
                             recyclerView.scrollToPosition(adapter.getItemCount()-1);
-                            prev.setText("전체 목록으로 돌아가기");
+                            prev.setText("back to list");
                             current_status = 1;
                             sw.setVisibility(View.INVISIBLE);
                         }
@@ -298,7 +298,7 @@ public class HomeFragment extends Fragment {
                             }
                             adapter.notifyDataSetChanged();
                             recyclerView.scrollToPosition(adapter.getItemCount()-1);
-                            prev.setText(sample_prev + "  (더보기..)");
+                            prev.setText(sample_prev + "  (sea more..)");
                             current_status = 0;
                             sw.setVisibility(View.VISIBLE);
                         }

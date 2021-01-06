@@ -191,7 +191,7 @@ public class NotificationsFragment extends Fragment {
                     }
                 }
                 else{
-                    notiTe.setText("위치나 시간이 선택되지 않았습니다.");
+                    notiTe.setText("Please select both 'Area' and 'Period'");
                 }
 
                 //textView.setText(sharedViewModel.getTime() + sharedViewModel.getLargeloc() + sharedViewModel.getSmallloc() + sharedViewModel.getSettin() + sharedViewModel. getHere());

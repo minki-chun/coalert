@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintHorizontal_bias="0.9"
-        android:text="현재지역만 보기 "
+        android:text="Show Current Area Only "
         android:layout_marginBottom="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"

@@ -14,10 +14,9 @@
         android:id="@+id/q1t"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="어디에 온 안전 안내문자를 보시겠어요?"
+        android:text="Please select area you want to see"
         android:textSize="20dp"
-        app:layout_constraintHorizontal_bias="0"
-        android:layout_marginLeft="30dp"
+        app:layout_constraintHorizontal_bias="0.5"
         android:textColor="#000000"
         app:layout_constraintBottom_toTopOf="@id/ll1"
         app:layout_constraintEnd_toEndOf="parent"
@@ -38,7 +37,7 @@
 
         <Spinner
             android:id="@+id/spinner1"
-            android:layout_width="135dp"
+            android:layout_width="100dp"
             android:layout_marginRight="10dp"
             android:layout_height="wrap_content"
             android:entries="@array/large_scale"
@@ -46,7 +45,7 @@
 
         <Spinner
             android:id="@+id/spinner2"
-            android:layout_width="135dp"
+            android:layout_width="170dp"
             android:layout_marginLeft="10dp"
             android:layout_height="wrap_content"
             android:entries="@array/small_scale"
@@ -68,28 +67,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintHorizontal_bias="0"
-            android:text="언제 온 안전 안내문자를 보시겠어요?"
+            android:text="Please select period you want to see"
             android:textSize="20dp"
             android:layout_marginLeft="30dp"
             android:textColor="#000000"
-            app:layout_constraintBottom_toTopOf="@+id/noti"
+            app:layout_constraintBottom_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 
-            <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/noti"
-            android:text=""
-            android:textColor="#FF0000"
-            android:textSize="20dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/q2t"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0"
-            android:layout_marginLeft="30dp"/>
     </LinearLayout>
 
     <LinearLayout
@@ -110,19 +96,19 @@
                 android:background="@drawable/button_button01"
                 android:textColor="#FFFFFF"
                 android:id="@+id/oneday"
-                android:text="최근 1일"
-                android:layout_width="wrap_content"
+                android:text="last one\nday"
+                android:layout_width="100dp"
                 android:layout_height="60dp"
-                android:textSize="20sp"/>
+                android:textSize="15sp"/>
             <Button
                 android:layout_margin="3dp"
                 android:background="@drawable/button_button01"
                 android:textColor="#FFFFFF"
                 android:id="@+id/sevenday"
-                android:text="최근 1주"
-                android:layout_width="wrap_content"
+                android:text="last one\nweek"
+                android:layout_width="100dp"
                 android:layout_height="60dp"
-                android:textSize="20sp"/>
+                android:textSize="15sp"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="wrap_content"
@@ -133,31 +119,46 @@
                 android:background="@drawable/button_button01"
                 android:textColor="#FFFFFF"
                 android:id="@+id/threeday"
-                android:text="최근 3일"
-                android:layout_width="wrap_content"
+                android:text="last three\ndays"
+                android:layout_width="100dp"
                 android:layout_height="60dp"
-                android:textSize="20sp"/>
+                android:textSize="15sp"/>
             <Button
                 android:layout_margin="3dp"
                 android:background="@drawable/button_button01"
                 android:textColor="#FFFFFF"
                 android:id="@+id/onefourday"
-                android:text="최근 2주"
-                android:layout_width="wrap_content"
+                android:text="last four\nweeks"
+                android:layout_width="100dp"
                 android:layout_height="60dp"
-                android:textSize="20sp"/>
+                android:textSize="15sp"/>
 
         </LinearLayout>
         <Button
             android:id="@+id/setOk"
             android:background="@drawable/button_button01"
             android:textColor="#FFFFFF"
-            android:textSize="30sp"
-            android:text="확인\n하기"
-            android:layout_marginLeft="40dp"
-            android:layout_width="match_parent"
+            android:textSize="18sp"
+            android:text="continue"
+            android:layout_marginLeft="20dp"
+            android:layout_width="120dp"
             android:layout_height="match_parent"/>
+
     </LinearLayout>
+    <TextView
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/noti"
+        android:text=""
+        android:textColor="#FF0000"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/buttonBox"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        android:layout_marginLeft="30dp"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
